@@ -1,0 +1,61 @@
+<!--
+The Underscore.js template of the form with the list of payment types.
+-->
+
+<div class="form__section form_sellPointFull__paymentMethodsSection">
+
+    <label>Payment types</label>
+
+    <div class="form_sellPointFull__paymentMethods">
+
+        <% block.model.collections.paymentMethods.forEach(function(paymentMethod) { %>
+
+        <div class="form_sellPointFull__paymentMethod row"
+            <%- !paymentMethod.get('default') ? 'data-modal=blocks/modal/paymentMethod/paymentMethod' : '' %>
+            data-sell-point-id="<%- block.model.id %>"
+            data-payment-method-id="<%- paymentMethod.id %>">
+
+            <div class="form_sellPointFull__paymentMethodIcon col-xs-2">
+
+                <%= block.icons[block.getPaymentMethodIcon(paymentMethod)] %>
+
+            </div>
+
+            <div class="form_sellPointFull__paymentMethodText col-xs-10">
+
+                <div class="form_sellPointFull__paymentMethodName">
+                    <%- paymentMethod.get('name') %>
+                </div>
+                <div class="form_sellPointFull__paymentMethodDescr">
+                    <%- paymentMethod.get('fiscalRecords') ? 'Fiscal' : 'Not fiscal' %>.
+                    <%- paymentMethod.get('method') === "Cash" ? 'Cash' : 'Bank terminal' %>
+                </div>
+
+            </div>
+
+            <div class="form_sellPointFull__paymentMethodSwitch col-xs-2">
+
+                <%= block.include(require('blocks/switch/switch'), {
+                    on: paymentMethod.get('active'),
+                    disabled: paymentMethod.get('default')
+                }) %>
+
+            </div>
+
+        </div>
+
+        <% }) %>
+
+        <div class="form_sellPointFull__paymentMethod">
+
+            <a class="form__action"
+               data-modal="blocks/modal/paymentMethod/paymentMethod"
+               data-sell-point-id="<%- block.model.id %>">
+                Add payment type
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

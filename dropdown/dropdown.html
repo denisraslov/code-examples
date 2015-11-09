@@ -1,0 +1,17 @@
+<!--
+    The Underscore.js template for the dropdown component (with Block-Element-Modificator classes notation)
+-->
+
+
+<div class="dropdown <%- get('classes') %> <%- opened ? 'dropdown_opened' : '' %>">
+    <div class="dropdown__head"><%= partials.head(obj) %></div>
+
+    <div class="dropdown__bodyTriangleBack"></div>
+    <div class="dropdown__bodyTriangleFront"></div>
+
+    <div class="dropdown__body <%- bodyClass ? 'dropdown__body_' + bodyClass : '' %>">
+
+        <%= partials.items(obj) %>
+
+    </div>
+</div>
